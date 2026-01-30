@@ -4,15 +4,18 @@ import {
   Get,
   Body,
   Res,
+  Req,
   HttpCode,
   UnauthorizedException,
 } from '@nestjs/common';
-import type { Response } from 'express';
+import type { Response, Request } from 'express';
+
+
 import { AuthService } from './auth.service';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(private readonly authService: AuthService) { }
 
   @Post('login')
   @HttpCode(200)
@@ -27,17 +30,26 @@ export class AuthController {
     res.cookie('auth', 'logado', {
       httpOnly: true,
       sameSite: 'lax',
+      secure: false, // dev
     });
 
     return { user };
   }
 
   @Get('me')
-  me() {
+  me(@Req() req: Request) {
+    if (req.cookies?.auth !== 'logado') {
+      throw new UnauthorizedException();
+    }
+
     const user = this.authService.getMe();
-    if (!user) throw new UnauthorizedException();
-    return { user, tenant: user.tenant };
+
+    return {
+      user,
+      tenant: user.tenant,
+    };
   }
+
 
   @Post('logout')
   logout(@Res({ passthrough: true }) res: Response) {
