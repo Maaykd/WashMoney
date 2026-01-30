@@ -47,16 +47,16 @@
  *
  * The mainPage value must match a key in the PAGES object exactly.
  */
-import Appointments from './pages/Appointments';
-import Clients from './pages/Clients';
-import Dashboard from './pages/Dashboard';
-import Employees from './pages/Employees';
-import Financial from './pages/Financial';
-import ServiceOrders from './pages/ServiceOrders';
-import Services from './pages/Services';
-import Settings from './pages/Settings';
-import Supplies from './pages/Supplies';
-import Reports from './pages/Reports';
+import Appointments from './pages/Appointments.jsx';
+import Clients from './pages/Clients.jsx';
+import Dashboard from './pages/Dashboard.jsx';
+import Employees from './pages/Employees.jsx';
+import Financial from './pages/Financial.jsx';
+import ServiceOrders from './pages/ServiceOrders.jsx';
+import Services from './pages/Services.jsx';
+import Settings from './pages/Settings.jsx';
+import Supplies from './pages/Supplies.jsx';
+import Reports from './pages/Reports.jsx';
 import __Layout from './Layout.jsx';
 
 
